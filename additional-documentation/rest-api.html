@@ -1,0 +1,4035 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ReDBox Portal API</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.4/semantic.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism-okaidia.min.css" />
+    <style>
+      blockquote {
+        border-left: solid 4px #eee;
+        padding-left: 8px;
+        font-style: italic;
+        margin-left: 0;
+        padding: 8px;
+      }
+
+      .ui.micro.label {
+        font-size: .25rem;
+      }
+
+      .ui.transaction.accordion .title {
+        text-align: center;
+      }
+
+      .ui.transaction.accordion .content {
+        border-top: solid 1px #ddd !important;
+        border-bottom: solid 1px #ddd !important;
+        background-color: rgba(0,0,0,.03);
+        padding: 0.5em 1em !important;
+      }
+
+      .ui.transaction.accordion .content.active {
+        margin-top: 0.5em;
+      }
+
+      .ui.basic.label {
+        text-align: left;
+        overflow: auto;
+      }
+      
+      .ui.basic.label.request-url {
+        user-select: text;
+      }
+
+      .resource .ui.sub.header {
+        text-transform: none;
+      }
+
+      @media only screen and (min-width: 768px) {
+        .sidewrap {
+          margin-right: 2rem;
+        }
+
+        .sidenav {
+          left: 0;
+          top: 0;
+          width: inherit;
+          position: fixed !important;
+          height: 100% !important;
+          overflow-y: auto !important;
+          padding-left: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ui padded grid">
+      <div class="sidewrap four wide computer five wide tablet sixteen wide mobile column">
+        <div class="sidenav">
+          
+<div class="ui horizontal divider">
+  <a href="#introduction">Introduction</a>
+</div>
+<div class="ui fluid secondary vertical menu">
+  <a class="item" href="#introduction">ReDBox Portal API</a>
+</div>
+
+
+<div class="ui accordion fluid">
+  
+    
+    <div class="title active">
+      <i class="dropdown icon"></i>
+      
+        <strong>Create Record</strong>
+      
+    </div>
+    <div class="content active">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item blue" href="#create-record-create-record">
+          <i class="ui blue empty circular label"></i>
+          
+            <span>Create Record</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Update Record Metadata</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item teal" href="#update-record-metadata-update-record-metadata">
+          <i class="ui teal empty circular label"></i>
+          
+            <span>Update Record Metadata</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Get Record Metadata</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item green" href="#get-record-metadata-get-record-metadata">
+          <i class="ui green empty circular label"></i>
+          
+            <span>Get Record Metadata</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Give users edit access to record</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item blue" href="#give-users-edit-access-to-record-give-users-edit-access-to-record">
+          <i class="ui blue empty circular label"></i>
+          
+            <span>Give users edit access to record</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Remove users edit access to record</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item red" href="#remove-users-edit-access-to-record-remove-users-edit-access-to-record">
+          <i class="ui red empty circular label"></i>
+          
+            <span>Remove users edit access to record</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Give users view access to record</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item blue" href="#give-users-view-access-to-record-give-users-view-access-to-record">
+          <i class="ui blue empty circular label"></i>
+          
+            <span>Give users view access to record</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Remove users view access to record</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item red" href="#remove-users-view-access-to-record-remove-users-view-access-to-record">
+          <i class="ui red empty circular label"></i>
+          
+            <span>Remove users view access to record</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Get access permissions for record</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item green" href="#get-access-permissions-for-record-get-access-permissions-for-record">
+          <i class="ui green empty circular label"></i>
+          
+            <span>Get access permissions for record</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>List users in the system</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item green" href="#list-users-in-the-system-list-users-in-the-system">
+          <i class="ui green empty circular label"></i>
+          
+            <span>List users in the system</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Find user in the system</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item green" href="#find-user-in-the-system-find-user-in-the-system">
+          <i class="ui green empty circular label"></i>
+          
+            <span>Find user in the system</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+    
+    <div class="title ">
+      <i class="dropdown icon"></i>
+      
+        <strong>Send an email</strong>
+      
+    </div>
+    <div class="content ">
+      <div class="ui fluid secondary vertical menu">
+      
+        <a class="item blue" href="#send-an-email-send-an-email">
+          <i class="ui blue empty circular label"></i>
+          
+            <span>Send an email</span>
+          
+        </a>
+      
+      </div>
+    </div>
+    
+  
+</div>
+
+
+        </div>
+      </div>
+      <div class="eleven wide computer ten wide tablet sixteen wide mobile column">
+        
+<div class="ui hidden divider header"></div>
+<h1 class="ui huge header" id="introduction">ReDBox Portal API</h1>
+<hr class="ui divider">
+<div class="description">
+  <p>The ReDBox Portal API provides authorized access to manage functions.</p>
+
+<h2 id="record-collection">Record Collection</h2>
+
+</div>
+
+        <div class="ui hidden divider"></div>
+        
+
+  <div class="ui horizontal divider" >
+    
+  </div>
+  <div class="ui header center aligned">
+    <div class="ui header">
+      <div class="sub header">
+        
+      </div>
+    </div>
+  </div>
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Create Record
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="create-record-create-record">
+              Create Record
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Create Record setting metadata, authorization and workflowStage
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/metadata/{recordType}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>recordType</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The type of record to create</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;authorization&#34;: {
+&#34;edit&#34;: [&#34;username&#34;],
+&#34;view&#34;: [&#34;username&#34;],
+&#34;editPending&#34;:[&#34;anEmail@redboxresearchdata.com.au&#34;],
+&#34;viewPending&#34;:[&#34;anEmail@redboxresearchdata.com.au&#34;]
+},
+&#34;metadata&#34;:{
+&#34;title&#34;: &#34;A sample title&#34;,
+&#34;description&#34;: &#34;A description&#34;
+},
+&#34;workflowStage&#34;: &#34;draft&#34;
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Location</td>
+      <td><code>/default/rdmp/api/records/metadata/a2985faeabb6d92b56af665ca466a965</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      201
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;code&#34;: &#34;201&#34;,
+&#34;oid&#34;: &#34;a2985faeabb6d92b56af665ca466a965&#34;
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Create Record only setting metadata
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/metadata/{recordType}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>recordType</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The type of record to create</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;title&#34;: &#34;A sample title&#34;,
+&#34;description&#34;: &#34;A description&#34;
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Location</td>
+      <td><code>/default/rdmp/api/records/metadata/a2985faeabb6d92b56af665ca466a965</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      201
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;code&#34;: &#34;201&#34;,
+&#34;oid&#34;: &#34;a2985faeabb6d92b56af665ca466a965&#34;
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Create Record setting metadata and workflowStage
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/metadata/{recordType}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>recordType</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The type of record to create</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;metadata&#34;:{
+&#34;title&#34;: &#34;A sample title&#34;,
+&#34;description&#34;: &#34;A description&#34;
+},
+&#34;workflowStage&#34;: &#34;draft&#34;
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Location</td>
+      <td><code>/default/rdmp/api/records/metadata/a2985faeabb6d92b56af665ca466a965</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      201
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;code&#34;: &#34;201&#34;,
+&#34;oid&#34;: &#34;a2985faeabb6d92b56af665ca466a965&#34;
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Create Record setting metadata and authorization
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/metadata/{recordType}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>recordType</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The type of record to create</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;authorization&#34;: {
+&#34;edit&#34;: [&#34;username&#34;],
+&#34;view&#34;: [&#34;username&#34;],
+&#34;editPending&#34;:[&#34;anEmail@redboxresearchdata.com.au&#34;],
+&#34;viewPending&#34;:[&#34;anEmail@redboxresearchdata.com.au&#34;]
+},
+&#34;metadata&#34;:{
+&#34;title&#34;: &#34;A sample title&#34;,
+&#34;description&#34;: &#34;A description&#34;
+}
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Location</td>
+      <td><code>/default/rdmp/api/records/metadata/a2985faeabb6d92b56af665ca466a965</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      201
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;code&#34;: &#34;201&#34;,
+&#34;oid&#34;: &#34;a2985faeabb6d92b56af665ca466a965&#34;
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Update Record Metadata
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="update-record-metadata-update-record-metadata">
+              Update Record Metadata
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Update record metadata
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui teal large button">
+                  <h3>PUT</h3>
+                </div>
+                <a class="ui basic fluid request-url teal label">
+                  <code>http://localhost:1337/default/rdmp/api/records/metadata/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;title&#34;: &#34;A sample title&#34;,
+&#34;description&#34;: &#34;A description&#34;
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;code&#34;: &#34;200&#34;,
+&#34;oid&#34;: &#34;a2985faeabb6d92b56af665ca466a965&#34;
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Get Record Metadata
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="get-record-metadata-get-record-metadata">
+              Get Record Metadata
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui green large button">
+                  <h3>GET</h3>
+                </div>
+                <a class="ui basic fluid request-url green label">
+                  <code>http://localhost:1337/default/rdmp/api/records/metadata/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;title&#34;: &#34;A sample title&#34;,
+&#34;description&#34;: &#34;A description&#34;
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Give users edit access to record
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="give-users-edit-access-to-record-give-users-edit-access-to-record">
+              Give users edit access to record
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Give users edit access to record
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/edit/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;users&#34;: [&#34;username1&#34;,&#34;username2&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;,
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/edit/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code></code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-">{
+&#34;usersPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;,
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/edit/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;,
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Remove users edit access to record
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="remove-users-edit-access-to-record-remove-users-edit-access-to-record">
+              Remove users edit access to record
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Remove users edit access to record
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui red large button">
+                  <h3>DELETE</h3>
+                </div>
+                <a class="ui basic fluid request-url red label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/edit/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;users&#34;: [&#34;username2&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui red large button">
+                  <h3>DELETE</h3>
+                </div>
+                <a class="ui basic fluid request-url red label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/edit/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui red large button">
+                  <h3>DELETE</h3>
+                </div>
+                <a class="ui basic fluid request-url red label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/edit/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code></code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-">{
+&#34;users&#34;: [&#34;username2&#34;],
+&#34;usersPending&#34;: [&#34;pendingusername2@email.com&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Give users view access to record
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="give-users-view-access-to-record-give-users-view-access-to-record">
+              Give users view access to record
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Give users view access to record
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/view/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;users&#34;: [&#34;username1&#34;,&#34;username2&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+&#34;username1&#34;,
+&#34;username2&#34;
+],
+&#34;edit&#34;: [
+
+],
+&#34;viewPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;
+],
+&#34;editPending&#34;: []
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/view/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code></code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-">{
+&#34;usersPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+&#34;username1&#34;,
+&#34;username2&#34;
+],
+&#34;edit&#34;: [
+
+],
+&#34;viewPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;
+],
+&#34;editPending&#34;: []
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/view/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code></code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-">{
+&#34;users&#34;: [&#34;username1&#34;,&#34;username2&#34;],
+&#34;usersPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+&#34;username1&#34;,
+&#34;username2&#34;
+],
+&#34;edit&#34;: [
+
+],
+&#34;viewPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;
+],
+&#34;editPending&#34;: []
+}
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Remove users view access to record
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="remove-users-view-access-to-record-remove-users-view-access-to-record">
+              Remove users view access to record
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST Remove users view access to record
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui red large button">
+                  <h3>DELETE</h3>
+                </div>
+                <a class="ui basic fluid request-url red label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/view/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;users&#34;: [&#34;username2&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username2&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;
+],
+&#34;viewPending&#34;: [&#34;pendingusername2@email.com&#34;
+],
+&#34;editPending&#34;: []
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui red large button">
+                  <h3>DELETE</h3>
+                </div>
+                <a class="ui basic fluid request-url red label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/view/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code></code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-">{
+&#34;usersPending&#34;: [&#34;pendingusername2@email.com&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username2&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;
+],
+&#34;viewPending&#34;: [&#34;pendingusername2@email.com&#34;
+],
+&#34;editPending&#34;: []
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui red large button">
+                  <h3>DELETE</h3>
+                </div>
+                <a class="ui basic fluid request-url red label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/view/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code></code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-">{
+&#34;users&#34;: [&#34;username2&#34;],
+&#34;usersPending&#34;: [&#34;pendingusername2@email.com&#34;]
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username2&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;
+],
+&#34;viewPending&#34;: [&#34;pendingusername2@email.com&#34;
+],
+&#34;editPending&#34;: []
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Get access permissions for record
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="get-access-permissions-for-record-get-access-permissions-for-record">
+              Get access permissions for record
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui green large button">
+                  <h3>GET</h3>
+                </div>
+                <a class="ui basic fluid request-url green label">
+                  <code>http://localhost:1337/default/rdmp/api/records/permissions/{id}</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>id</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The id of the record to update</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;viewRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;editRoles&#34;: [
+  &#34;Admin&#34;,
+  &#34;Librarians&#34;
+],
+&#34;view&#34;: [
+  &#34;username1&#34;
+],
+&#34;edit&#34;: [
+  &#34;username1&#34;,
+  &#34;username2&#34;
+],
+&#34;viewPending&#34;: [
+],
+&#34;editPending&#34;: [&#34;pendingusername1@email.com&#34;,&#34;pendingusername2@email.com&#34;]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            List users in the system
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="list-users-in-the-system-list-users-in-the-system">
+              List users in the system
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui green large button">
+                  <h3>GET</h3>
+                </div>
+                <a class="ui basic fluid request-url green label">
+                  <code>http://localhost:1337/default/rdmp/api/users</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>page</code></td>
+      <td class="center aligned">
+        <code>number</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The page number. Defaults to 1.</p>
+
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>pageSize</code></td>
+      <td class="center aligned">
+        <code>number</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The number of results to return per page. Defaults to 10</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;summary&#34;: {
+    &#34;numFound&#34;: 1
+},
+&#34;records&#34;: [
+    {
+        &#34;type&#34;: &#34;local&#34;,
+        &#34;name&#34;: &#34;Local user&#34;,
+        &#34;username&#34;: &#34;user1&#34;,
+        &#34;email&#34;: &#34;localuser@redboxresearchdata.com.au&#34;,
+        &#34;token&#34;: &#34;16f613d9-29da-4326-a120-1ad70078f3c5&#34;,
+        &#34;createdAt&#34;: &#34;2017-10-09T03:34:47.660Z&#34;,
+        &#34;updatedAt&#34;: &#34;2017-11-20T04:08:33.061Z&#34;,
+        &#34;id&#34;: &#34;59daee5720b453050057c2f5&#34;
+    }
+]
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Find user in the system
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="find-user-in-the-system-find-user-in-the-system">
+              Find user in the system
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui green large button">
+                  <h3>GET</h3>
+                </div>
+                <a class="ui basic fluid request-url green label">
+                  <code>http://localhost:1337/default/rdmp/api/users/find</code>
+                </a>
+              </div>
+              
+                <table class="ui celled definition table">
+                  <thead>
+                    <tr>
+                      <th colspan="4">Parameters</th>
+                    </tr>
+                  <thead>
+                  <tbody>
+                    
+                      
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>searchBy</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The attribute to search by. e.g. email</p>
+
+        
+      </td>
+    </tr>
+  
+    <tr>
+      <td class="center aligned one wide">
+        <i class="ui empty circular label black" data-content="required" data-position="top center"></i>
+      </td>
+      <td><code>query</code></td>
+      <td class="center aligned">
+        <code>string</code>
+        
+        
+      </td>
+      <td class="eight wide">
+        <p>The value to query. Only exact matches.</p>
+
+        
+      </td>
+    </tr>
+  
+
+                    
+                    
+                  </tbody>
+                </table>
+              
+              
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked blue segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui blue circular label">
+                      200
+                    </a>
+                    <code>application/json</code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-json">{
+&#34;type&#34;: &#34;local&#34;,
+&#34;name&#34;: &#34;Local user&#34;,
+&#34;username&#34;: &#34;user1&#34;,
+&#34;email&#34;: &#34;localuser@redboxresearchdata.com.au&#34;,
+&#34;token&#34;: &#34;16f613d9-29da-4326-a120-1ad70078f3c5&#34;,
+&#34;createdAt&#34;: &#34;2017-10-09T03:34:47.660Z&#34;,
+&#34;updatedAt&#34;: &#34;2017-11-20T04:08:33.061Z&#34;,
+&#34;id&#34;: &#34;59daee5720b453050057c2f5&#34;
+}
+
+</code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+    
+      <div class="ui stacked segments">
+        <div class="ui basic segment resource">
+          <div class="ui purple huge ribbon label">
+            Send an email
+          </div>
+          <div class="ui header">
+            <div class="ui sub header">
+              
+            </div>
+          </div>
+        </div>
+
+        
+          
+<div class="ui grey horizontal small divider header">
+  <i class="ui grey micro circular label"></i>
+  <i class="ui pink micro circular label"></i>
+  <i class="ui grey micro circular label"></i>
+</div>
+
+          <div class="ui basic segment">
+            <h3 class="ui block center aligned header" id="send-an-email-send-an-email">
+              Send an email
+            </h3>
+            <div class="description"></div>
+
+            
+              <h4 class="ui horizontal divider">
+                REQUEST
+              </h4>
+              <div class="description"></div>
+              <div class="fluid ui large labeled button">
+                <div class="ui blue large button">
+                  <h3>POST</h3>
+                </div>
+                <a class="ui basic fluid request-url blue label">
+                  <code>http://localhost:1337/default/rdmp/api/email</code>
+                </a>
+              </div>
+              
+              
+                
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+    <tr>
+      <td class="four wide">Content-Type</td>
+      <td><code>application/json</code></td>
+    </tr>
+  
+    <tr>
+      <td class="four wide">Authorization</td>
+      <td><code>Bearer abcabcab-abca-abca-abca-abcabcabcabc</code></td>
+    </tr>
+  
+  </tbody>
+</table>
+
+              
+              
+                <div class="ui stacked segment">
+                  <div class="ui fluid transaction accordion">
+                    <div class="title">
+                      <code>application/json</code>
+                    </div>
+                    <div class="content tabbed">
+                      <div class="ui top attached tabular menu">
+                        <a data-tab="body" class="active item">BODY</a>
+                        <a data-tab="schema" class="item">SCHEMA</a>
+                      </div>
+                      <div class="ui bottom attached active tab segment" data-tab="body">
+                        <pre style="white-space: inherit">
+                          <code class="language-json">{
+&#34;to&#34;: [&#34;user@redboxresearchdata.com.au&#34;],
+&#34;subject&#34;:&#34;A sample subject&#34;,
+&#34;template&#34;: &#34;emailTemplateName&#34;,
+&#34;data&#34;: {&#34;property&#34;: &#34;values to populate in template&#34;}
+}
+</code>
+                        </pre>
+                      </div>
+                      <div class="ui bottom attached tab segment" data-tab="schema">
+                        <pre style="white-space: inherit">
+                          <code class="language-json"></code>
+                        </pre>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              
+
+              <h4 class="ui horizontal divider">RESPONSE</h4>
+              <div class="description"></div>
+              
+<table class="ui celled definition table">
+  <thead>
+    <tr>
+      <th colspan="2">Headers</th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  </tbody>
+</table>
+
+              <div class="ui stacked  segment">
+                <div class="ui fluid transaction accordion">
+                  <div class="title center aligned">
+                    <a class="ui  circular label">
+                      0
+                    </a>
+                    <code></code>
+                  </div>
+                  <div class="content tabbed">
+                    <div class="ui top attached tabular menu">
+                      <a data-tab="body" class="active item">BODY</a>
+                      <a data-tab="schema" class="item">SCHEMA</a>
+                    </div>
+                    <div class="ui bottom attached active tab segment" data-tab="body">
+                      <pre style="white-space: inherit">
+                        <code class="language-"></code>
+                      </pre>
+                    </div>
+                    <div class="ui bottom attached tab segment" data-tab="schema">
+                      <pre style="white-space: inherit">
+                        <code class="language-json"></code>
+                      </pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+        
+        </div>
+      <div class="ui hidden divider"></div>
+    
+  
+
+
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/accordion.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/tab.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/transition.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/components/popup.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/prism.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.13.0/components/prism-json.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('.ui.accordion').accordion({ animateChildren: false, duration: 0 });
+        $('.content.tabbed').each(function(index) {
+          $('.ui.tabular .item', $(this)).tab({ context: $(this) });
+        });
+        $('.ui.vertical.menu').on('click', '.item', function() {
+          $('.ui.vertical.menu .item').removeClass('active');
+          $(this).addClass('active');
+        });
+        $('.ui.empty.circular.label').popup();
+      });
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
