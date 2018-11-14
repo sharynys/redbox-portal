@@ -1,3 +1,464 @@
----
-DONOTEDIT: This file is generated from the API Blueprint spec at build time. Edit
-  apidocsapib.ejs to make changes
+swagger: '2.0'
+info:
+  description: |-
+    The ReDBox Portal API provides authorized access to manage functions.
+
+    ## Record Collection
+  title: ReDBox Portal API
+  version: ''
+host: 'localhost:1337'
+basePath: /
+schemes:
+  - http
+paths:
+  /<%= branding %>/<%= portal %>/api/email:
+    post:
+      parameters:
+        - in: body
+          name: body
+          schema:
+            example:
+              data:
+                property: values to populate in template
+              subject: A sample subject
+              template: emailTemplateName
+              to:
+                - user@redboxresearchdata.com.au
+            properties:
+              data:
+                properties:
+                  property:
+                    type: string
+                type: object
+              subject:
+                type: string
+              template:
+                type: string
+              to:
+                items:
+                  type: string
+                type: array
+            type: object
+      responses: {}
+      tags: []
+      description: ''
+      summary: Send an email
+  '/<%= branding %>/<%= portal %>/api/records/metadata/{id}':
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              description: A description
+              title: A sample title
+          headers: {}
+      tags: []
+      description: ''
+      summary: Get Record Metadata
+    put:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              description: A description
+              title: A sample title
+            properties:
+              description:
+                type: string
+              title:
+                type: string
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              code: '200'
+              oid: a2985faeabb6d92b56af665ca466a965
+          headers: {}
+      tags: []
+      description: ''
+      summary: Update Record Metadata
+  '/<%= branding %>/<%= portal %>/api/records/metadata/{recordType}':
+    post:
+      produces:
+        - application/json
+      parameters:
+        - description: The type of record to create
+          in: path
+          name: recordType
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              authorization:
+                edit:
+                  - username
+                editPending:
+                  - anEmail@redboxresearchdata.com.au
+                view:
+                  - username
+                viewPending:
+                  - anEmail@redboxresearchdata.com.au
+              metadata:
+                description: A description
+                title: A sample title
+              workflowStage: draft
+            properties:
+              authorization:
+                properties:
+                  edit:
+                    items:
+                      type: string
+                    type: array
+                  editPending:
+                    items:
+                      type: string
+                    type: array
+                  view:
+                    items:
+                      type: string
+                    type: array
+                  viewPending:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              metadata:
+                properties:
+                  description:
+                    type: string
+                  title:
+                    type: string
+                type: object
+              workflowStage:
+                type: string
+            type: object
+      responses:
+        '201':
+          description: Created
+          examples:
+            application/json:
+              code: '201'
+              oid: a2985faeabb6d92b56af665ca466a965
+          headers: {}
+      tags: []
+      description: ''
+      summary: Create Record
+  '/<%= branding %>/<%= portal %>/api/records/permissions/edit/{id}':
+    delete:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              users:
+                - username2
+            properties:
+              users:
+                items:
+                  type: string
+                type: array
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              edit:
+                - username2
+              editPending:
+                - pendingusername2@email.com
+              editRoles:
+                - Admin
+                - Librarians
+              view:
+                - username1
+              viewPending: []
+              viewRoles:
+                - Admin
+                - Librarians
+          headers: {}
+      tags: []
+      description: ''
+      summary: Remove users edit access to record
+    post:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              users:
+                - username1
+                - username2
+            properties:
+              users:
+                items:
+                  type: string
+                type: array
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              edit:
+                - username1
+                - username2
+              editPending:
+                - pendingusername1@email.com
+                - pendingusername2@email.com
+              editRoles:
+                - Admin
+                - Librarians
+              view:
+                - username1
+              viewPending: []
+              viewRoles:
+                - Admin
+                - Librarians
+          headers: {}
+      tags: []
+      description: ''
+      summary: Give users edit access to record
+  '/<%= branding %>/<%= portal %>/api/records/permissions/view/{id}':
+    delete:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              users:
+                - username2
+            properties:
+              users:
+                items:
+                  type: string
+                type: array
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              edit:
+                - username1
+              editPending: []
+              editRoles:
+                - Admin
+                - Librarians
+              view:
+                - username2
+              viewPending:
+                - pendingusername2@email.com
+              viewRoles:
+                - Admin
+                - Librarians
+          headers: {}
+      tags: []
+      description: ''
+      summary: Remove users view access to record
+    post:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+        - in: body
+          name: body
+          schema:
+            example:
+              users:
+                - username1
+                - username2
+            properties:
+              users:
+                items:
+                  type: string
+                type: array
+            type: object
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              edit: []
+              editPending: []
+              editRoles:
+                - Admin
+                - Librarians
+              view:
+                - username1
+                - username2
+              viewPending:
+                - pendingusername1@email.com
+                - pendingusername2@email.com
+              viewRoles:
+                - Admin
+                - Librarians
+          headers: {}
+      tags: []
+      description: ''
+      summary: Give users view access to record
+  '/<%= branding %>/<%= portal %>/api/records/permissions/{id}':
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: The id of the record to update
+          in: path
+          name: id
+          required: true
+          type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              edit:
+                - username1
+                - username2
+              editPending:
+                - pendingusername1@email.com
+                - pendingusername2@email.com
+              editRoles:
+                - Admin
+                - Librarians
+              view:
+                - username1
+              viewPending: []
+              viewRoles:
+                - Admin
+                - Librarians
+          headers: {}
+      tags: []
+      description: ''
+      summary: Get access permissions for record
+  /<%= branding %>/<%= portal %>/api/users:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: The page number. Defaults to 1.
+          in: body
+          name: page
+          required: true
+          schema:
+            type: number
+        - description: The number of results to return per page. Defaults to 10
+          in: body
+          name: pageSize
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              records:
+                - createdAt: '2017-10-09T03:34:47.660Z'
+                  email: localuser@redboxresearchdata.com.au
+                  id: 59daee5720b453050057c2f5
+                  name: Local user
+                  token: 16f613d9-29da-4326-a120-1ad70078f3c5
+                  type: local
+                  updatedAt: '2017-11-20T04:08:33.061Z'
+                  username: user1
+              summary:
+                numFound: 1
+          headers: {}
+      tags: []
+      description: ''
+      summary: List users in the system
+  /<%= branding %>/<%= portal %>/api/users/find:
+    get:
+      produces:
+        - application/json
+      parameters:
+        - description: The attribute to search by. e.g. email
+          in: body
+          name: searchBy
+          required: true
+          schema:
+            type: string
+        - description: The value to query. Only exact matches.
+          in: body
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          examples:
+            application/json:
+              createdAt: '2017-10-09T03:34:47.660Z'
+              email: localuser@redboxresearchdata.com.au
+              id: 59daee5720b453050057c2f5
+              name: Local user
+              token: 16f613d9-29da-4326-a120-1ad70078f3c5
+              type: local
+              updatedAt: '2017-11-20T04:08:33.061Z'
+              username: user1
+          headers: {}
+      tags: []
+      description: ''
+      summary: Find user in the system
+definitions:
+  Create Record: {}
+  Find user in the system: {}
+  Get Record Metadata: {}
+  Get access permissions for record: {}
+  Give users edit access to record: {}
+  Give users view access to record: {}
+  List users in the system: {}
+  Remove users edit access to record: {}
+  Remove users view access to record: {}
+  Send an email: {}
+  Update Record Metadata: {}
+tags: []
+
